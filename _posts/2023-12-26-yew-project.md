@@ -65,6 +65,17 @@ fn main() {
 }
 ```
 
+> Tip: If you use Emmet abbreviations in VSCode, you can configure the the "Included languages" setting:
+>
+>```json
+> "emmet.includeLanguages": {
+>     "rust": "html"
+> }
+>```
+>
+> This way, you can have Emmet abbreviations inside of the `html!` macro!
+{: .prompt-tip }
+
 And create an `index.html` file in the root of your cargo project:
 
 ```html
@@ -96,20 +107,71 @@ address = "127.0.0.1" # Address to listen on
 # address = "0.0.0.0" # If you want to listen to external requests
 port = 8000 # Listen on this port
 
-dist = "build" # Folder to put the built files into (default is `dist`)
+dist = "docs" # Folder to put the built files into (default is `dist`)
 ```
 
 You can see a lot more options [here](https://github.com/trunk-rs/trunk/blob/main/Trunk.toml).
 
+## My Calculator App
+
+After that, I wanted to make a more useful app, so I decided to make a simple calculator.
+
+I started by looking at [this example](https://github.com/yewstack/yew/blob/master/examples/counter/src/main.rs). It is the same basic program as the counter in the introduction, but it uses a `struct`-based component.
+
+I won't go very in-depth, but the basic structure is this:
+
+```rs
+pub enum Msg {
+    // Possible messages
+}
+
+pub struct App {
+    // Fields represent the state of the app
+}
+impl Component for App {
+    type Message = Msg;
+    type Properties = ();
+
+    fn create(/* ... */) -> Self {
+        // Create component
+    }
+
+    fn update(/* ... */, msg: Self::Message) -> bool {
+        // Update the state of the component based on the message
+    }
+
+    fn view(/* ... */) -> Html {
+        html! {
+            // Generate the html representation of the component based on its state
+        }
+    }
+}
+
+fn main() {
+    yew::Renderer::<App>::new().render();
+}
+```
+
+I made a crude proof of concept (it was kind of terrible), and decided to find out how to deploy it to GitHub pages (You can see the finished version at [yew.eamonburns.com](https://yew.eamonburns.com/)).
+
+## Deploying to GitHub Pages
+
+First, I had to make it public.
+
+Then I changed the source to be the `master` branch in the `docs/` directory (The `docs/` and `/ (root)` directories are the only directories available from the settings page, that is why I changed the `dist` option in the `Trunk.toml` file).
+
+I tried to get to it via `eamonburns.com/simple_yew_app` (the name of the repo), but that was kind of inconsistent about whether it would actually load the app properly, I decided to use GitHub Actions to deploy it instead, so that it could have a more consistent environment.
+
+I did some more Googling and found [this GitHub workflow](https://github.com/SpanishPear/yew_worker_stylist_actions_pages_template/blob/main/.github/workflows/deploy.yml) that looked like it would do the job.
+
+Unfortunately, it was a little outdated, so I had to update the version numbers and change a few other things (like adding a CNAME), and this is the [final workflow file](https://github.com/Agent-E11/simple_yew_app/blob/master/.github/workflows/deploy-gh-pages.yml).
+
+After that, on every push to the `master` branch, the site gets rebuilt and deployed to GitHub pages!
+
 <!--
 
-- Started basic calculator app
+TODO: Better app functionality
 
-- Setup GitHub pages
-    - Make public
-    - Add source (docs)
-    - Change Trunk.toml file
-        - dist = "docs"
-    - Add custom domain
+TODO: Better styles with Tailwind.css
 
 -->
