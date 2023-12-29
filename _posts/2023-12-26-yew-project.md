@@ -2,15 +2,15 @@
 title: Yew Project Hosted with GitHub Pages
 date: 2023-12-26 
 categories: [Rust,Web]
-tags: [rust,yew,github-pages]
+tags: [rust,yew,tailwind,github-pages]
 published: false
 ---
 
-Recently, I have been wanting to create something with [WebAssembly (WASM)](https://webassembly.org/), so I looked up frameworks for creating frontend apps with Rust and found [Yew](https://yew.rs/). They have a nice [introduction/tutorial]() that is very easy to follow.
+Recently, I have been wanting to create something with [WebAssembly (WASM)](https://webassembly.org/), so I looked up frameworks for creating frontend apps with Rust and found [Yew](https://yew.rs/). They have a nice [introduction/tutorial](https://yew.rs/docs/getting-started/introduction) that is very easy to follow.
 
 ## Yew Introduction
 
-First, you should install Rust, and then install [Trunk]() and add the WASM target:
+First, you should install Rust, and then install [Trunk](https://trunkrs.dev/) and add the WASM target:
 
 ```sh
 rustup target add wasm32-unknown-unknown
@@ -166,11 +166,21 @@ I did some more Googling and found [this GitHub workflow](https://github.com/Spa
 
 Unfortunately, it was a little outdated, so I had to update the version numbers and change a few other things (like adding a CNAME), and this is the [final workflow file](https://github.com/Agent-E11/simple_yew_app/blob/master/.github/workflows/deploy-gh-pages.yml).
 
-After that, on every push to the `master` branch, the site gets rebuilt and deployed to GitHub pages!
+(I also changed the source to the `/ (root)` directory in the `gh-pages` branch, because that is where [this GitHub Pages action](https://github.com/peaceiris/actions-gh-pages?tab=readme-ov-file#%EF%B8%8F-source-directory-publish_dir) places the files by default)
+
+After that, on every push to the `master` branch, the site gets rebuilt and deployed to GitHub pages automagically!
+
+## A More Functional Calculator
+
+After I put the calculator up on GitHub pages, I wanted to make it work better, so I added a bunch of features like a backspace button, a clear button, and history.
+
+Great! Now it _works_ but it doesn't _look nice_:
+
+![Picture of calculator](/assets/img/yew-project_bad-calculator.png)
+
+Now, I want to add some styles to it, and I decided to use [Tailwind.css](https://tailwindcss.com/).
 
 <!--
-
-TODO: Better app functionality
 
 TODO: Better styles with Tailwind.css
 
