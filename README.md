@@ -47,10 +47,15 @@ Please see the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy#d
 
 ## License
 
-This work is published under [MIT][mit] License.
+The [Chirpy template][chirpy] is published under [MIT][mit] License.
+
+Blog posts on [eamonburns.com](https://www.eamonburns.com) by Eamon Burns are licensed under [CC BY-NC-SA 4.0][cc-license] license.
+
+("blog posts" refers to any file that is under the `_posts` directory)
 
 [gem]: https://rubygems.org/gems/jekyll-theme-chirpy
 [chirpy]: https://github.com/cotes2020/jekyll-theme-chirpy/
 [use-template]: https://github.com/cotes2020/chirpy-starter/generate
 [CD]: https://en.wikipedia.org/wiki/Continuous_deployment
 [mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
+[cc-license]: https://creativecommons.org/licenses/by-nc-sa/4.0/
